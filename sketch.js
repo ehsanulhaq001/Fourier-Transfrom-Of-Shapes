@@ -30,10 +30,13 @@ function setup() {
   }
   shapeLength = Math.abs(max.x - min.x);
   shapeHeight = Math.abs(max.y - min.y);
-  maxDim = length > height ? length : height;
-  scale = Math.floor(
-    shapeHeight > shapeLength ? maxDim / shapeHeight : maxDim / shapeLength
-  );
+  minDim = width < height ? width : height;
+  scale =
+    Math.floor(
+      shapeHeight > shapeLength
+        ? (10 * minDim) / shapeHeight
+        : (10 * minDim) / shapeLength
+    ) / 10;
 
   //obtain Fourier Transforms for x and y axis and a circles array
   X = fourierTransform(shape, "x");
