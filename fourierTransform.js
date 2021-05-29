@@ -6,8 +6,8 @@ function fourierTransform(points, z) {
         let im = 0;
         for (let j = 0; j < n; j++) {
             let angle = (2 * Math.PI / n) * i * j;
-            re += points[j][z] * Math.cos(angle);
-            im -= points[j][z] * Math.sin(angle);
+            re += (points[j][z] - min[z]) * Math.cos(angle);
+            im -= (points[j][z] - min[z]) * Math.sin(angle);
         }
         re = re / n;
         im = im / n;
