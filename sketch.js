@@ -1,6 +1,7 @@
 //get the canvas ready
 const cnv = document.querySelector("#canvas");
 const ctx = cnv.getContext("2d");
+const input = document.querySelector("#shape");
 cnv.width = window.innerWidth;
 cnv.height = window.innerHeight;
 cnv.style.backgroundColor = "#182C61";
@@ -14,10 +15,12 @@ let circles = [];
 let trail = [];
 let min = { x: 1000, y: 1000 };
 let max = { x: 0, y: 0 };
+let s;
 
 function setup() {
   //get the shape ready
-  let s = 0;
+  s = input.value;
+  s = s - 1;
   let shape = [];
   let skip = 1;
   if (shapes[s].length > 1000) skip = Math.floor(shapes[s].length / 1000);
@@ -119,6 +122,17 @@ function animate() {
   const dt = 1 / X.length;
   t += dt;
   if (t > 1) t = 0;
+
+  //on input change reset all the parameters
+  //and setup again
+  if (input.value != s + 1) {
+    circles = [];
+    trail = [];
+    t = 0;
+    min = { x: 1000, y: 1000 };
+    max = { x: 0, y: 0 };
+    setup();
+  }
 
   requestAnimationFrame(animate);
 }
